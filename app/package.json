@@ -6,7 +6,6 @@
   "author": "Dmytro Vasin <dmytro.vasin@gmail.com>",
   "main": "electron-app/js/index.js",
   "dependencies": {
-    "electron-json-config": "^1.4.0",
     "axios": "^0.15.2",
     "os": "^0.1.1",
     "path": "^0.12.7",

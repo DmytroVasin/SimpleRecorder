@@ -1,7 +1,8 @@
-// npm-check -u
+// yarn-update
 // TODO: "target electron" - спросить Валеру!
 
 var webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
   entry: {
@@ -11,11 +12,11 @@ module.exports = {
   context: __dirname + '/browser-app/src/js',
 
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['*', '.js', '.jsx']
   },
 
   output: {
-    path: './browser-app/dist/js',
+    path: path.resolve(__dirname, 'dist', 'js'),
     filename: '[name].js',
     publicPath: 'http://localhost:8080/browser-app/dist/js/'
   },

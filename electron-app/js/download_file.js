@@ -3,16 +3,17 @@ const path = require('path');
 
 const { app, dialog, session } = electron;
 
-let downloadFile = function(mainWindow, url, artist, title) {
+const downloadFile = function(mainWindow, url) {
   let targetPath = app.getPath('downloads');
-  let fileName = fileNameConcat(artist, title);
+  let name = fileName();
 
   mainWindow.webContents.send('start-track-downloading');
 
   dialog.showSaveDialog({
-    defaultPath: path.join(targetPath, fileName),
+    title: 'Download Screen Record',
+    defaultPath: path.join(targetPath, name),
     filters: [
-      { name: 'Audio', extensions: ['mp3'] }
+      { name: 'Movies', extensions: ['mp4'] }
     ]
   }, function(filePath) {
     if (filePath) {
@@ -45,16 +46,21 @@ let downloadFile = function(mainWindow, url, artist, title) {
   })
 }
 
-const fileNameConcat = function(artist, title) {
-  let fileName = artist + '_' + title;
-  return fileName.replace(/ /g,'_');
-}
-
 const sendNotification = function (mainWindow, title, message) {
   mainWindow.webContents.send('display-notification', {
     title: title,
     options: { body: message }
   })
+}
+
+const fileName = function() {
+  let today = new Date();
+  let month = (today.getMonth() + 1)
+  let date = today.getDate()
+  let year = today.getFullYear()
+  let format = '.mp4'
+
+  return 'ScreenRecord-'+month+'-'+date+'-'+year+format;
 }
 
 module.exports = downloadFile;

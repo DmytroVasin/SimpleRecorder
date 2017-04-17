@@ -19,7 +19,7 @@
     "publish:dist": "yarn run empty && yarn run publish:browser && yarn run publish:electron && yarn run publish:osx"
   },
   "dependencies": {
-    "axios": "^0.15.2",
+    "axios": "^0.16.1",
     "lodash": "^4.17.0",
     "os": "^0.1.1",
     "path": "^0.12.7",
@@ -39,18 +39,18 @@
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.5.0",
     "classnames": "^2.2.5",
-    "css-loader": "^0.26.0",
+    "css-loader": "^0.28.0",
     "electron": "^1.4.8",
-    "electron-builder": "^10.0.0",
+    "electron-builder": "^17.0.1",
     "electron-devtools-installer": "^2.0.1",
-    "file-loader": "^0.9.0",
+    "file-loader": "^0.11.1",
     "json-loader": "^0.5.4",
-    "node-sass": "^3.12.5",
-    "sass-loader": "^4.0.2",
-    "style-loader": "^0.13.1",
+    "node-sass": "^4.5.2",
+    "sass-loader": "^6.0.3",
+    "style-loader": "^0.16.1",
     "url-loader": "^0.5.7",
-    "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.15.2"
+    "webpack": "^2.4.1",
+    "webpack-dev-server": "^2.4.2"
   },
   "build": {
     "asar": false,

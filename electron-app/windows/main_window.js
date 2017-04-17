@@ -11,12 +11,12 @@ class MainWindow {
     let htmlPath = 'file://' + path.join(__dirname, '..') + '/pages/main_page.html'
 
     this.window = new BrowserWindow({
-      show: false,
+      show: true, //false,
       height: 321,
       width: 800,
-      frame: false,
+      frame: true, //false
       hasShadow: false,
-      transparent: true,
+      transparent: false, //true,
       resizable: false
     });
 
@@ -26,40 +26,6 @@ class MainWindow {
       this.window.on('blur', () => {
         this.window.hide();
       });
-    }
-  }
-
-  setWindowSize(state) {
-    let height;
-
-    if ( state ) {
-      height = 321
-    } else {
-      height = 95
-    }
-
-    this.window.setSize(800, height);
-  }
-
-  setWindowPosition(bounds) {
-    let { x, y } = this._determineWindowPosition(bounds);
-    this.window.setPosition(x, y);
-  }
-
-  _determineWindowPosition(bounds) {
-    let windowSize = this.window.getSize()
-    let screenSize = electron.screen.getDisplayNearestPoint( electron.screen.getCursorScreenPoint() ).workArea
-
-    if (platform == 'darwin') {
-      return {
-        x: Math.floor(bounds.x + bounds.width - windowSize[0] + 100),
-        y: screenSize.y
-      }
-    } else if (platform == 'win32') {
-      return {
-        x: Math.floor(bounds.x + bounds.width - windowSize[0] + 100),
-        y: Math.floor(screenSize.height - (windowSize[1] - screenSize.y))
-      }
     }
   }
 }
