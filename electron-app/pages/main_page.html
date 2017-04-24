@@ -7,6 +7,8 @@
       window.shell = require('electron').shell;
       window.remote = require('electron').remote;
       window.ipcRenderer = require('electron').ipcRenderer;
+      window.platform = require('os').platform();
+
       window.desktopCapturer = require('electron').desktopCapturer;
     </script>
   </head>
@@ -25,6 +27,10 @@
       js_script.src = bundlePath;
       js_script.async = true;
       document.body.appendChild(js_script);
+    </script>
+
+    <script>
+      document.getElementById('react-root').className = window.platform;
     </script>
 
     <script>

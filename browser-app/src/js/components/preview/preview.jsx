@@ -13,6 +13,17 @@ export class Preview extends Component {
     };
   }
 
+  handleStream = (stream) => {
+    let { video } = this.refs;
+
+    video.src = window.URL.createObjectURL(stream)
+    video.onloadedmetadata = (e) => { video.play() }
+  }
+
+  handleError = (e) => {
+    console.log(e)
+  }
+
   startRec = () => {
 
     navigator.getUserMedia(
@@ -21,6 +32,14 @@ export class Preview extends Component {
       this.getMediaError
     );
 
+  }
+
+  startDesktopRec = () => {
+    ipcRenderer.send('start-recording');
+  }
+
+  stopDesktopRec = () => {
+    ipcRenderer.send('stop-recording');
   }
 
   stopRec = () => {
@@ -63,7 +82,8 @@ export class Preview extends Component {
     console.log('-------------START---------------------')
   }
 
-  getMediaError = () => {
+  getMediaError = (e) => {
+    console.log(e)
     console.log('getUserMedia() failed.')
   }
 
@@ -79,7 +99,7 @@ export class Preview extends Component {
     let blob = new Blob(recordedChunks)
     let blob_url = window.URL.createObjectURL(blob)
 
-    ipcRenderer.send('dowload-file-from-url', blob_url);
+    // ipcRenderer.send('dowload-file-from-url', blob_url);
   }
 
   playLast = () => {
@@ -116,6 +136,8 @@ export class Preview extends Component {
 
     return (
       <div>
+        <button onClick={ this.startDesktopRec }>Record Desktop</button>
+        <button onClick={ this.stopDesktopRec }>Stop Record Desktop</button>
         <button onClick={ this.startRec }>Record Camera</button>
         <button onClick={ this.stopRec }>Stop Recording</button>
         <button onClick={ this.downloadRecording }>Downlaod</button>

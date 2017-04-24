@@ -19,8 +19,11 @@
     "publish:dist": "yarn run empty && yarn run publish:browser && yarn run publish:electron && yarn run publish:osx"
   },
   "dependencies": {
+    "aperture": "2.1.0",
     "axios": "^0.16.1",
+    "fs": "^0.0.1-security",
     "lodash": "^4.17.0",
+    "moment": "^2.14.1",
     "os": "^0.1.1",
     "path": "^0.12.7",
     "react": "^15.4.1",

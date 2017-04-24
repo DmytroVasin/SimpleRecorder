@@ -31,12 +31,16 @@ class ApplicationComponent extends Component {
   render() {
     return (
       <div className='window'>
-        <div>
-          Menu
+        <div className='window-container'>
+          <div>Menu</div>
+
+          <div className='window-content'>
+            { this.props.children }
+          </div>
         </div>
-        <div className='window-content'>
-          { this.props.children }
-        </div>
+
+        <div className='window-arrow-back'></div>
+        <div className='window-arrow-front'></div>
       </div>
     );
   }

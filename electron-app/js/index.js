@@ -5,17 +5,20 @@ if ( isDev ) {
   installExtension = require('electron-devtools-installer');
 }
 
+const aperture = require('aperture')();
 const electron = require('electron');
 const {app, ipcMain, Menu, shell} = electron;
 
 const platform = require('os').platform();
 const menuTemplate = require('./menuTemplate');
 const MainWindow  = require('../windows/main_window');
+const RecorderWindow  = require('../windows/recorder_window');
 const TrayIcon = require('./TrayIcon');
 
-const downloadFile = require('./download_file');
+const { saveFile } = require('./download_file');
 
 let mainWindow = null;
+let recorder = null;
 let trayIcon = null;
 
 if ( !isDev ) {
@@ -32,18 +35,76 @@ app.on('ready', function () {
   Menu.setApplicationMenu( Menu.buildFromTemplate(menuTemplate(mainWindow)) );
 
   trayIcon = new TrayIcon(mainWindow);
+
+  recorder = new RecorderWindow();
+  recorder.window.show();
 });
 
 ipcMain.on('quit-app', function() {
   mainWindow.window.close();
+  recorder.window.close();
+
   app.quit();
 });
 
-ipcMain.on('dowload-file-from-url', function(event, url) {
-  downloadFile(mainWindow.window, url)
+ipcMain.on('start-recording', () => {
+  startRecording()
 });
+
+ipcMain.on('stop-recording', () => {
+  stopRecording()
+});
+
 
 const installExtentions = function () {
   installExtension['default']( installExtension['REDUX_DEVTOOLS'] )
   installExtension['default']( installExtension['REACT_DEVELOPER_TOOLS'] )
+}
+
+// ----------------------------------- RECORDING
+
+const startRecording = function () {
+
+  let cropArea = recorder.window.getBounds()
+  cropArea.x += 1;
+  cropArea.y += 1;
+  cropArea.width -= 2;
+  cropArea.height -= 2;
+
+  console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
+  console.log(cropArea)
+  console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
+
+  // const screenBounds = electron.screen.getDisplayMatching(recorderBounds);
+  // console.log('??????????????????????????????????')
+  // console.log(screenBounds)
+  // console.log('??????????????????????????????????')
+
+
+  const options = {
+    fps: 30,
+    cropArea: cropArea,
+    showCursor: true,
+    highlightClicks: true
+  };
+
+  aperture.startRecording(options).then(filePath => {
+    console.log(`Started recording after ${Date.now() / 1000}s`);
+  })
+  .catch(err => {
+    console.log('.....................................')
+    console.log(err);
+    console.log('.....................................')
+  });
+}
+
+const stopRecording = function () {
+  aperture.stopRecording()
+    .then(filePath => {
+      console.log(`file path: ${filePath}`);
+      console.log(`Stop recording after ${Date.now() / 1000}s`);
+      saveFile(mainWindow.window, filePath);
+    });
+
+  recorder.window.close();
 }

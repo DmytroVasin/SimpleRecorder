@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WebRTCViewer Recorder</title>
+
+    <script type='text/javascript'>
+      window.remote = require('electron').remote;
+    </script>
+  </head>
+
+  <body>
+    <div id='react-root'></div>
+
+    <script>
+      var bundlePath = '../../browser-app/dist/js/recorder.js';
+
+      if (process.env.NODE_ENV === 'development') {
+        bundlePath = 'http://localhost:8080/browser-app/dist/js/recorder.js';
+      }
+
+      var js_script = document.createElement('script');
+      js_script.src = bundlePath;
+      js_script.async = true;
+      document.body.appendChild(js_script);
+    </script>
+  </body>
+</html>

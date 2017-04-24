@@ -1,12 +1,11 @@
 // yarn-update
-// TODO: "target electron" - спросить Валеру!
-
 var webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
   entry: {
-    main: './main.jsx'
+    main: './main.jsx',
+    recorder: './recorder.jsx',
   },
   target: 'electron',
   context: __dirname + '/browser-app/src/js',

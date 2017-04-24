@@ -19,6 +19,7 @@ class TrayIcon {
     if ( this.mainWindow.window.isVisible() ) {
       this.mainWindow.window.hide();
     } else {
+      this.mainWindow.setWindowPosition(bounds);
       this.mainWindow.window.show();
     }
   }

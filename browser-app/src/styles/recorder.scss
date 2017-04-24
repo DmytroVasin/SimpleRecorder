@@ -1,7 +1,4 @@
-input, textarea, select, label {
-  font-size: 12px;
-  box-sizing: border-box;
-}
+@import 'utils/reset';
 
 html {
   height: 100%;
@@ -15,6 +12,10 @@ html, body {
   background: rgba(0, 0, 0, 0);
 }
 
+html {
+  -webkit-app-region: drag;
+}
+
 body {
   height: 100%;
   color: #333;
@@ -25,6 +26,11 @@ body {
   font: caption;
 
   #react-root {
+    cursor: move;
     height: 100%;
+
+    background-color: transparent;
+    border-radius: 5px;
+    border: 1px dashed white;
   }
 }

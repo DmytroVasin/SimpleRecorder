@@ -1,13 +1,15 @@
+const { rename } = require('fs');
+const moment = require('moment');
+
 const electron = require('electron');
 const path = require('path');
 
 const { app, dialog, session } = electron;
 
-const downloadFile = function(mainWindow, url) {
+const saveFile = function(mainWindow, url) {
   let targetPath = app.getPath('downloads');
   let name = fileName();
-
-  mainWindow.webContents.send('start-track-downloading');
+  let message
 
   dialog.showSaveDialog({
     title: 'Download Screen Record',
@@ -17,34 +19,16 @@ const downloadFile = function(mainWindow, url) {
     ]
   }, function(filePath) {
     if (filePath) {
-
-      session.defaultSession.on('will-download', function(event, item, webContents) {
-        item.setSavePath(filePath)
-
-        item.once('done', function(event, state) {
-          mainWindow.webContents.send('finish-track-downloading');
-          let title;
-          let message;
-          if (state === 'interrupted') {
-            title = 'Something went wrong. Sorry.';
-            message = '';
-          }
-
-          if (state === 'completed') {
-            title = item.getSavePath().replace(/^.*[\\\/]/, '');
-            message = 'File was download successfully';
-          }
-
-          sendNotification(mainWindow, title, message);
-        });
-      });
-
-      mainWindow.webContents.downloadURL(url);
-    } else {
-      mainWindow.webContents.send('finish-track-downloading');
+      rename(url, filePath);
     }
+
+    title = filePath.replace(/^.*[\\\/]/, '');
+    message = 'File was download successfully';
+
+    // mainWindow.webContents.send('finish-track-downloading');
+    sendNotification(mainWindow, name, message);
   })
-}
+};
 
 const sendNotification = function (mainWindow, title, message) {
   mainWindow.webContents.send('display-notification', {
@@ -54,13 +38,11 @@ const sendNotification = function (mainWindow, title, message) {
 }
 
 const fileName = function() {
-  let today = new Date();
-  let month = (today.getMonth() + 1)
-  let date = today.getDate()
-  let year = today.getFullYear()
-  let format = '.mp4'
+  let data = moment().format('MMMM_Do_YYYY_hh_mm_ss')
 
-  return 'ScreenRecord-'+month+'-'+date+'-'+year+format;
+  return `${data}.mp4`;
 }
 
-module.exports = downloadFile;
+module.exports = {
+  saveFile: saveFile
+}
