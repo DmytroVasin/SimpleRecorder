@@ -28,9 +28,24 @@ body {
   #react-root {
     cursor: move;
     height: 100%;
+    position: relative;
 
     background-color: transparent;
     border-radius: 5px;
     border: 1px dashed white;
+
+    #camera-preview {
+      height: 100px;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      display: none;
+      border: 1px solid black;
+      border-radius: 3px;
+
+      &.show {
+        display: block
+      }
+    }
   }
 }

@@ -131,6 +131,10 @@ export class Preview extends Component {
     }
   }
 
+  toggleCamera = () => {
+    ipcRenderer.send('toggle-camera');
+  }
+
   render() {
     const { text } = this.props
 
@@ -142,6 +146,7 @@ export class Preview extends Component {
         <button onClick={ this.stopRec }>Stop Recording</button>
         <button onClick={ this.downloadRecording }>Downlaod</button>
         <button onClick={ this.playLast }>Play last video</button>
+        <button onClick={ this.toggleCamera }>Toggle camera</button>
         <label >
           <input type='checkbox' checked={this.state.isOn} onChange={this.handleAudioChange}/>
           Mic is On

@@ -9,30 +9,10 @@ class ApplicationComponent extends Component {
     super(props);
   }
 
-  componentDidMount() {
-    ipcRenderer.on('start-track-downloading', this.handleStartTrackDownloading);
-    ipcRenderer.on('finish-track-downloading', this.handleFinishTrackDownloading);
-  }
-
-  componentWillUnmount() {
-    ipcRenderer.removeListener('start-track-downloading', this.handleStartTrackDownloading);
-    ipcRenderer.removeListener('finish-track-downloading', this.handleFinishTrackDownloading);
-  }
-
-
-  handleStartTrackDownloading = () => {
-    this.props.actions.startTrackDownloading()
-  }
-
-  handleFinishTrackDownloading = () => {
-    this.props.actions.finishTrackDownloading()
-  }
-
   render() {
     return (
       <div className='window'>
         <div className='window-container'>
-          <div>Menu</div>
 
           <div className='window-content'>
             { this.props.children }

@@ -55,6 +55,10 @@ ipcMain.on('stop-recording', () => {
   stopRecording()
 });
 
+ipcMain.on('toggle-camera', () => {
+  recorder.window.webContents.send('toggle-camera');
+});
+
 
 const installExtentions = function () {
   installExtension['default']( installExtension['REDUX_DEVTOOLS'] )
@@ -106,5 +110,5 @@ const stopRecording = function () {
       saveFile(mainWindow.window, filePath);
     });
 
-  recorder.window.close();
+  recorder.window.hide();
 }
