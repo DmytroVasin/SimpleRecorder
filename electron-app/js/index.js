@@ -68,22 +68,18 @@ const installExtentions = function () {
 // ----------------------------------- RECORDING
 
 const startRecording = function () {
-
   let cropArea = recorder.window.getBounds()
+  let workArea = electron.screen.getPrimaryDisplay().workArea
+
+  // Electron use top/left corner
+  // aperture use bottom/left corne
+  cropArea.y = (workArea.height + workArea.y) - (cropArea.height + cropArea.y);
+
+  // Remove dashed boundaries
   cropArea.x += 1;
   cropArea.y += 1;
   cropArea.width -= 2;
   cropArea.height -= 2;
-
-  console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
-  console.log(cropArea)
-  console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
-
-  // const screenBounds = electron.screen.getDisplayMatching(recorderBounds);
-  // console.log('??????????????????????????????????')
-  // console.log(screenBounds)
-  // console.log('??????????????????????????????????')
-
 
   const options = {
     fps: 30,
