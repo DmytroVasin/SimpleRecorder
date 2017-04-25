@@ -1,27 +1,26 @@
-const { Tray } = require('electron');
+const { app, Tray, Menu } = require('electron');
 const path = require('path');
 
 class TrayIcon {
-  constructor(mainWindow) {
-    this.mainWindow = mainWindow;
-
+  constructor() {
     this.tray = new Tray(path.join(__dirname, '../icons/mac/icon-22.png'));
 
     this.tray.setToolTip('WebRTCViewer')
     this.tray.setHighlightMode('never')
 
-    this.tray.on('click', this._toggleWindow.bind(this))
-    this.tray.on('right-click', this._toggleWindow.bind(this))
-    this.tray.on('double-click', this._toggleWindow.bind(this))
-  }
+    const contextMenu = Menu.buildFromTemplate([
+      { label: 'Start' },
+      { label: 'Take Snapshot' },
+      { type: 'separator' },
+      {
+        label: 'Quit Recorder',
+        click: () => {
+          app.quit();
+        }
+      }
+    ])
 
-  _toggleWindow(e, bounds) {
-    if ( this.mainWindow.window.isVisible() ) {
-      this.mainWindow.window.hide();
-    } else {
-      this.mainWindow.setWindowPosition(bounds);
-      this.mainWindow.window.show();
-    }
+    this.tray.setContextMenu(contextMenu)
   }
 }
 

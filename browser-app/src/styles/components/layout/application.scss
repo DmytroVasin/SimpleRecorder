@@ -1,76 +1,14 @@
 .window {
   height: 100%;
 
-  .window-arrow-front,
-  .window-arrow-back {
-    position: absolute;
-    width: 0;
-    height: 0;
-    right: 103px;
-    border-right: 12px solid transparent;
-    border-left: 12px solid transparent;
-  }
-
   .window-container {
     position: relative;
     color: $text-color;
     font-size: 12px;
     background: $white;
-    border: 1px solid $dark-border;
-    border-radius: 5px;
     overflow: hidden;
 
     .window-content {
-      height: 224px;
-      border-top: 1px solid $border;
-    }
-
-    &.hidden {
-      .window-content {
-        display: none;
-
-        #lc-player {
-          .lc-player-badge {
-            img {
-              border-bottom-left-radius: 4px;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-.darwin {
-  .window {
-    .window-arrow-front {
-      top: 5px;
-      border-bottom: 12px solid $white;
-    }
-    .window-arrow-back {
-      top: 3px;
-      border-bottom: 12px solid $dark-border;
-    }
-
-    .window-container {
-      top: 15px;
-    }
-  }
-}
-
-.win32 {
-  .window {
-    .window-arrow-front {
-      bottom: 10px;
-      border-top: 12px solid $white;
-    }
-    .window-arrow-back {
-      bottom: 8px;
-      border-top: 12px solid $dark-border;
-    }
-
-    .window-container {
-      top: 0;
     }
   }
 }

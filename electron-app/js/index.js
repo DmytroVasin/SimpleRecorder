@@ -34,7 +34,7 @@ app.on('ready', function () {
   mainWindow = new MainWindow();
   Menu.setApplicationMenu( Menu.buildFromTemplate(menuTemplate(mainWindow)) );
 
-  trayIcon = new TrayIcon(mainWindow);
+  trayIcon = new TrayIcon();
 
   recorder = new RecorderWindow();
   recorder.window.show();

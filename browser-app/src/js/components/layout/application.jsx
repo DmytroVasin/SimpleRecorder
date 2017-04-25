@@ -17,10 +17,8 @@ class ApplicationComponent extends Component {
           <div className='window-content'>
             { this.props.children }
           </div>
-        </div>
 
-        <div className='window-arrow-back'></div>
-        <div className='window-arrow-front'></div>
+        </div>
       </div>
     );
   }
