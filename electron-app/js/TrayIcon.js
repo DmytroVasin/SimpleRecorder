@@ -9,8 +9,18 @@ class TrayIcon {
     this.tray.setHighlightMode('never')
 
     const contextMenu = Menu.buildFromTemplate([
-      { label: 'Start' },
-      { label: 'Take Snapshot' },
+      {
+        label: 'Start',
+        click: () => {
+          console.log('Start recording')
+        }
+      },
+      {
+        label: 'Take Snapshot',
+        click: () => {
+          console.log('Stop recording')
+        }
+      },
       { type: 'separator' },
       {
         label: 'Quit Recorder',

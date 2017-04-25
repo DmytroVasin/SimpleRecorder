@@ -21,13 +21,6 @@ let mainWindow = null;
 let recorder = null;
 let trayIcon = null;
 
-if ( !isDev ) {
-  // Dock works only on Mac
-  if (app.dock) {
-    app.dock.hide();
-  }
-}
-
 app.on('ready', function () {
   if ( isDev ) installExtentions();
 

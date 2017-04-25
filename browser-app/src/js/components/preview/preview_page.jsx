@@ -6,7 +6,7 @@ export class PreviewPage extends Component {
 
   render() {
     return (
-      <div>
+      <div id='preview-page'>
         <Preview text='Record Camera'/>
       </div>
     )

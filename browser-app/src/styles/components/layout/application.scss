@@ -1,14 +1,17 @@
 .window {
+  background-color: red;
   height: 100%;
 
   .window-container {
+    height: 100%;
     position: relative;
-    color: $text-color;
+    color: #6A6A6A;
     font-size: 12px;
-    background: $white;
+    background: #FFF;
     overflow: hidden;
 
     .window-content {
+      height: 100%;
     }
   }
 }
