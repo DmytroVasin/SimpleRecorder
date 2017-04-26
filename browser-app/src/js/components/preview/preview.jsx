@@ -9,7 +9,7 @@ export class Preview extends Component {
 
     this.state = {
       recording: false,
-      showVideo: true,
+      showVideo: false,
       settingsOpen: false
     };
   }
