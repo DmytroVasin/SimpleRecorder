@@ -26,30 +26,37 @@ export class Preview extends Component {
     return (
       <div id='preview-page'>
 
-        <div className='left-side'>
-          <button onClick={ this.toggleCamera }>Toggle camera</button>
+        <button onClick={ this.toggleCamera }>Toggle camera</button>
 
-          <div className='button big'>
-            <img src={videoSrc} />
-          </div>
-          <div className='button big'>
-            <img src={imageSrc} />
-          </div>
+        <div className='button big'>
+          <img src={videoSrc} />
         </div>
-        <div className='right-side'>
+        <div className='button big'>
+          <img src={imageSrc} />
+        </div>
 
-          <div className='button big'>
-            <img src={videoSrc} />
+        <div id='settings'>
+          <div className='row'>
+            <div className='question'>
+              Grab video
+            </div>
+
+            <div className='switch'>
+              <input id='cmn-toggle-1' className='cmn-toggle cmn-toggle-round-flat' type='checkbox' />
+              <label htmlFor='cmn-toggle-1'></label>
+            </div>
           </div>
 
-          <div className='button big'>
-            <img src={videoSrc} />
-          </div>
+          <div className='row'>
+            <div className='question'>
+              Grab audio
+            </div>
 
-          <div className='button big'>
-            <img src={videoSrc} />
+            <div className='switch'>
+              <input id='cmn-toggle-2' className='cmn-toggle cmn-toggle-round-flat' type='checkbox' />
+              <label htmlFor='cmn-toggle-2'></label>
+            </div>
           </div>
-
         </div>
 
       </div>

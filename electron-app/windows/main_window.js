@@ -13,7 +13,7 @@ class MainWindow {
     this.window = new BrowserWindow({
       show: true,
       height: 200,
-      width: 600,
+      width: 400,
       frame: true,
       hasShadow: false,
       resizable: false
