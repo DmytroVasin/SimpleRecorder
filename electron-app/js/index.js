@@ -8,7 +8,6 @@ if ( isDev ) {
 const electron = require('electron');
 const {app, ipcMain, Menu, shell} = electron;
 
-const platform = require('os').platform();
 const menuTemplate = require('./menuTemplate');
 const MainWindow  = require('../windows/main_window');
 const RecorderWindow  = require('../windows/recorder_window');
@@ -21,7 +20,7 @@ let mainWindow = null;
 let recorder = null;
 let trayIcon = null;
 
-app.on('ready', function () {
+app.on('ready', () => {
   if ( isDev ) installExtentions();
 
   mainWindow = new MainWindow();
@@ -33,7 +32,7 @@ app.on('ready', function () {
   recorder.window.show();
 });
 
-ipcMain.on('quit-app', function() {
+ipcMain.on('quit-app', () => {
   mainWindow.window.close();
   recorder.window.close();
 
@@ -56,20 +55,24 @@ ipcMain.on('stop-recording', () => {
   })
 });
 
+ipcMain.on('toggle-camera', (event, boolean) => {
+  recorder.window.webContents.send('toggle-camera', boolean);
+});
 
-const sendNotification = function (title, message) {
+ipcMain.on('resize-app-window', (event, boolean) => {
+  mainWindow.setWindowSize(boolean);
+});
+
+
+const sendNotification = (title, message) => {
   mainWindow.window.webContents.send('display-notification', {
     title: title,
     options: { body: message }
   })
 }
 
-ipcMain.on('toggle-camera', (event, boolean) => {
-  recorder.window.webContents.send('toggle-camera', boolean);
-});
 
-
-const installExtentions = function () {
+const installExtentions = () => {
   installExtension['default']( installExtension['REDUX_DEVTOOLS'] )
   installExtension['default']( installExtension['REACT_DEVELOPER_TOOLS'] )
 }
