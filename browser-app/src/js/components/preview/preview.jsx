@@ -16,8 +16,15 @@ export class Preview extends Component {
     };
   }
 
-  toggleCamera = () => {
-    ipcRenderer.send('toggle-camera');
+  handleToggleChange = (event) => {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+
+    this.setState({
+      isOn: value
+    }, () => {
+      ipcRenderer.send('toggle-camera', this.state.isOn);
+    });
   }
 
   render() {
@@ -25,8 +32,6 @@ export class Preview extends Component {
 
     return (
       <div id='preview-page'>
-
-        <button onClick={ this.toggleCamera }>Toggle camera</button>
 
         <div className='button big'>
           <img src={videoSrc} />
@@ -42,7 +47,7 @@ export class Preview extends Component {
             </div>
 
             <div className='switch'>
-              <input id='cmn-toggle-1' className='cmn-toggle cmn-toggle-round-flat' type='checkbox' />
+              <input id='cmn-toggle-1' className='cmn-toggle cmn-toggle-round-flat' type='checkbox' checked={this.state.isOn} onChange={this.handleToggleChange}/>
               <label htmlFor='cmn-toggle-1'></label>
             </div>
           </div>

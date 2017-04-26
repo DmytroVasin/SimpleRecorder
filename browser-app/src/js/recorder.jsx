@@ -45,9 +45,9 @@ class Recorder extends Component {
     ipcRenderer.removeListener('toggle-camera', this.toggleCamera);
   }
 
-  toggleCamera = () => {
+  toggleCamera = (event, boolean) => {
     this.setState({
-      camera: !this.state.camera
+      camera: boolean
     });
   }
 

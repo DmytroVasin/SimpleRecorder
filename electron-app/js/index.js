@@ -64,8 +64,8 @@ const sendNotification = function (title, message) {
   })
 }
 
-ipcMain.on('toggle-camera', () => {
-  recorder.window.webContents.send('toggle-camera');
+ipcMain.on('toggle-camera', (event, boolean) => {
+  recorder.window.webContents.send('toggle-camera', boolean);
 });
 
 
