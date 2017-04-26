@@ -4,20 +4,16 @@
   #preview-page {
     background: -webkit-linear-gradient(top, #d4d5d6 0%, #d2d3d4 22%, #c8c9ca 68%, #c8c9ca 100%);
 
-    #main-preview {
+    #recorder {
 
       #big-buttons {
-        &:after {
-          content: "";
-          display: table;
-          clear: both;
-        }
+        display: flex;
+        justify-content: space-around;
+        padding: 10px 10px 13px 10px;
 
         .button {
-          float: left;
           cursor: pointer;
-          margin: 10px;
-          padding: 10px 20px;
+          padding: 5px 10px;
 
           border-radius: 5px;
           box-shadow: 1px 1px 1px #000, inset 1px 1px 1px #fff;
@@ -35,33 +31,6 @@
           }
         }
       }
-
-      #show-more {
-        position: relative;
-        cursor: pointer;
-        width: 100%;
-        padding: 5px 10px;
-        background: #eee;
-
-        &:after {
-          content: "";
-          width: 0;
-          height: 0;
-          position: absolute;
-          right: 16px;
-          top: 50%;
-          margin-top: -3px;
-          border-width: 6px 6px 0 6px;
-          border-style: solid;
-          border-color: grey transparent;
-        }
-
-        &.active {
-          &:after {
-            border-width: 0 6px 6px 6px;
-          }
-        }
-      }
     }
   }
 }
@@ -69,20 +38,52 @@
 #settings {
   display: table;
   width: 100%;
+  padding-bottom: 10px;
 
   .row {
     display: table-row;
 
+    #show-more {
+      position: relative;
+      cursor: pointer;
+      width: 100%;
+      padding: 5px 10px;
+      background: #eee;
+      display: table-cell;
+
+      &:after {
+        content: "";
+        width: 0;
+        height: 0;
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        margin-top: -3px;
+        border-width: 6px 6px 0 6px;
+        border-style: solid;
+        border-color: grey transparent;
+      }
+
+      &.active {
+        &:after {
+          border-width: 0 6px 6px 6px;
+        }
+      }
+      &.disable {
+        &:after {
+          border-width: 0 6px 6px 6px;
+        }
+      }
+    }
 
     .question,
     .switch {
       display: table-cell;
       vertical-align: middle;
-      padding: 10px;
+      padding: 5px 10px;
     }
 
     .question {
-      font-size: 16px;
     }
 
     .switch {

@@ -1,7 +1,7 @@
 const isDev = (process.env.NODE_ENV === 'development');
 
 const electron = require('electron');
-const { BrowserWindow } = electron;
+const { app, BrowserWindow } = electron;
 const path = require('path');
 
 class MainWindow {
@@ -11,14 +11,19 @@ class MainWindow {
 
     this.window = new BrowserWindow({
       show: true,
-      height: 150,
+      height: 121,
       width: 200,
       frame: true,
       hasShadow: false,
-      resizable: false
+      resizable: false,
+      maximizable: false
     });
 
     this.window.loadURL(htmlPath);
+
+    this.window.on('close', (e) => {
+      app.quit();
+    });
   }
 
   setWindowSize(state) {
@@ -26,9 +31,9 @@ class MainWindow {
     let width = this.window.getSize()[0];
 
     if ( state ) {
-      height = 250
+      height = 221
     } else {
-      height = 150
+      height = 121
     }
 
     this.window.setSize(width, height);
