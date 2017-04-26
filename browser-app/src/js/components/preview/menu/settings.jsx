@@ -27,9 +27,7 @@ export class MenuSettings extends React.Component {
         </div>
 
         <div className='row'>
-          <div className='question'>
-            Grab video
-          </div>
+          <div className='question'>Video</div>
 
           <div className='switch'>
             <input id='cmn-toggle-1' className='cmn-toggle cmn-toggle-round-flat' type='checkbox' checked={showVideo} onChange={this.handleToggleVideo}/>
@@ -38,9 +36,7 @@ export class MenuSettings extends React.Component {
         </div>
 
         <div className='row'>
-          <div className='question'>
-            Grab audio
-          </div>
+          <div className='question'>Audio</div>
 
           <div className='switch'>
             <input id='cmn-toggle-2' className='cmn-toggle cmn-toggle-round-flat' type='checkbox' />

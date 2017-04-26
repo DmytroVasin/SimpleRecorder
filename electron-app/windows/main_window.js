@@ -20,6 +20,7 @@ class MainWindow {
     });
 
     this.window.loadURL(htmlPath);
+    this.setWindowPosition();
 
     this.window.on('close', (e) => {
       app.quit();
@@ -31,12 +32,19 @@ class MainWindow {
     let width = this.window.getSize()[0];
 
     if ( state ) {
-      height = 221
+      height = 191
     } else {
       height = 121
     }
 
     this.window.setSize(width, height);
+  }
+
+  setWindowPosition(bounds) {
+    let monitorWidth = electron.screen.getPrimaryDisplay().workArea.width
+    let windowWidth = this.window.getBounds().width
+
+    this.window.setPosition(monitorWidth - windowWidth, 0);
   }
 }
 
