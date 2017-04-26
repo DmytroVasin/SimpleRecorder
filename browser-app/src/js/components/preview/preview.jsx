@@ -24,15 +24,34 @@ export class Preview extends Component {
     const { text } = this.props
 
     return (
-      <div>
-        <button onClick={ this.toggleCamera }>Toggle camera</button>
+      <div id='preview-page'>
 
-        <div className='button green'>
-          <img src={videoSrc} />
+        <div className='left-side'>
+          <button onClick={ this.toggleCamera }>Toggle camera</button>
+
+          <div className='button big'>
+            <img src={videoSrc} />
+          </div>
+          <div className='button big'>
+            <img src={imageSrc} />
+          </div>
         </div>
-        <div className='button green'>
-          <img src={imageSrc} />
+        <div className='right-side'>
+
+          <div className='button big'>
+            <img src={videoSrc} />
+          </div>
+
+          <div className='button big'>
+            <img src={videoSrc} />
+          </div>
+
+          <div className='button big'>
+            <img src={videoSrc} />
+          </div>
+
         </div>
+
       </div>
     )
   }
