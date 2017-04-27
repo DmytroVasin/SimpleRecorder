@@ -101,6 +101,7 @@ export class Preview extends Component {
           stopRecording={this.stopRecording} />
 
         <MenuSettings
+          recorder={this.state.recorder}
           withAudio={this.state.withAudio}
           showVideo={this.state.showVideo}
           settingsOpen={this.state.settingsOpen}

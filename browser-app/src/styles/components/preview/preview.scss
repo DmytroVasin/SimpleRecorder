@@ -109,7 +109,9 @@
       }
       &.disable {
         &:after {
-          border-width: 0 6px 6px 6px;
+          top: 56%;
+          border-width: 2px 6px 2px 6px;
+          border-color: grey;
         }
       }
     }

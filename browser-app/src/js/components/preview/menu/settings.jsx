@@ -18,17 +18,26 @@ export class MenuSettings extends React.Component {
   }
 
   handleToggleSettings = () => {
-    this.props.toggleSettings()
+    if( this.isChangeble() ) {
+      this.props.toggleSettings()
+    }
+  }
+
+  isChangeble = () => {
+    if (['picking', 'video_cropping', 'photo_cropping'].includes(this.props.recorder) ) {
+      return true
+    }
+    return false
   }
 
   render () {
-    const { recording, settingsOpen, showVideo, withAudio } = this.props;
+    const { settingsOpen, showVideo, withAudio } = this.props;
 
     return (
       <div id='settings'>
 
         <div className='row'>
-          <div id='show-more' className={ classNames({ 'active': settingsOpen, 'disable': recording }) } onClick={this.handleToggleSettings}>
+          <div id='show-more' className={ classNames({ 'active': settingsOpen, 'disable': !this.isChangeble() }) } onClick={this.handleToggleSettings}>
             Settings
           </div>
         </div>
