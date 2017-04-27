@@ -46,7 +46,7 @@ export class Preview extends Component {
     this.setState({
       recorder: 'processing',
     }, () => {
-      ipcRenderer.send('start-processing', this.state.withAudio);
+      ipcRenderer.send('start-processing');
     })
   }
 
@@ -69,6 +69,8 @@ export class Preview extends Component {
   toggleAudio = (value) => {
     this.setState({
       withAudio: value
+    }, () => {
+      ipcRenderer.send('toggle-audio', this.state.withAudio);
     });
   }
 

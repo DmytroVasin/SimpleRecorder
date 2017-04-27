@@ -13,12 +13,13 @@ const MainWindow  = require('../windows/main_window');
 const RecorderWindow  = require('../windows/recorder_window');
 const TrayIcon = require('./TrayIcon');
 
-const { startRecording, stopRecording } = require('./recorder');
+const Actuary  = require('./actuary');
 const { saveFile } = require('./save_file');
 
 let mainWindow = null;
 let recorder = null;
 let trayIcon = null;
+let actuary = null;
 
 app.on('ready', () => {
   if ( isDev ) installExtentions();
@@ -29,6 +30,7 @@ app.on('ready', () => {
   trayIcon = new TrayIcon();
 
   recorder = new RecorderWindow();
+  actuary = new Actuary(recorder)
 });
 
 ipcMain.on('quit-app', () => {
@@ -38,10 +40,10 @@ ipcMain.on('quit-app', () => {
   app.quit();
 });
 
-ipcMain.on('start-processing', (event, boolean) => {
+ipcMain.on('start-processing', (event) => {
   recorder.disable()
 
-  startRecording(recorder, boolean, () => {
+  actuary.startRecording(() => {
     mainWindow.window.webContents.send('finish-processing')
   });
 });
@@ -54,7 +56,7 @@ ipcMain.on('stop-recording', () => {
   recorder.enable()
   recorder.window.hide()
 
-  stopRecording((recorderedFilePath) => {
+  actuary.stopRecording((recorderedFilePath) => {
     saveFile(recorderedFilePath, (savedFilePath) => {
 
       title = savedFilePath.replace(/^.*[\\\/]/, '');
@@ -68,6 +70,10 @@ ipcMain.on('stop-recording', () => {
 
 ipcMain.on('toggle-camera', (event, boolean) => {
   recorder.window.webContents.send('toggle-camera', boolean);
+});
+
+ipcMain.on('toggle-audio', (event, boolean) => {
+  actuary.toggleAudio(boolean)
 });
 
 ipcMain.on('resize-app-window', (event, boolean) => {
