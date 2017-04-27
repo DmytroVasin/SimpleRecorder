@@ -10,12 +10,19 @@ export class MenuSettings extends React.Component {
     this.props.toggleVideo(value)
   }
 
+  handleToggleAudio = (event) => {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+
+    this.props.toggleAudio(value)
+  }
+
   handleToggleSettings = () => {
     this.props.toggleSettings()
   }
 
   render () {
-    const { recording, settingsOpen, showVideo } = this.props;
+    const { recording, settingsOpen, showVideo, withAudio } = this.props;
 
     return (
       <div id='settings'>
@@ -39,7 +46,7 @@ export class MenuSettings extends React.Component {
           <div className='question'>Audio</div>
 
           <div className='switch'>
-            <input id='cmn-toggle-2' className='cmn-toggle cmn-toggle-round-flat' type='checkbox' />
+            <input id='cmn-toggle-2' className='cmn-toggle cmn-toggle-round-flat' type='checkbox' checked={withAudio} onChange={this.handleToggleAudio}/>
             <label htmlFor='cmn-toggle-2'></label>
           </div>
         </div>

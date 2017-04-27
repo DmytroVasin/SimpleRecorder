@@ -29,7 +29,6 @@ app.on('ready', () => {
   trayIcon = new TrayIcon();
 
   recorder = new RecorderWindow();
-  recorder.window.show();
 });
 
 ipcMain.on('quit-app', () => {
@@ -39,8 +38,14 @@ ipcMain.on('quit-app', () => {
   app.quit();
 });
 
-ipcMain.on('start-recording', () => {
-  startRecording(recorder)
+ipcMain.on('start-processing', (event, boolean) => {
+  startRecording(recorder, boolean, () => {
+    mainWindow.window.webContents.send('finish-processing')
+  });
+});
+
+ipcMain.on('start-cropping', () => {
+  recorder.window.show();
 });
 
 ipcMain.on('stop-recording', () => {

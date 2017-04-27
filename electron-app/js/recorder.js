@@ -1,7 +1,7 @@
 const electron = require('electron');
 const aperture = require('aperture')();
 
-const startRecording = function (recorder) {
+const startRecording = function (recorder, boolean, callback) {
   console.log('-------------------------------------------------')
   console.log('Preparing: ...-----------------------------------')
   console.log('-------------------------------------------------')
@@ -18,18 +18,28 @@ const startRecording = function (recorder) {
   cropArea.y += 1;
   cropArea.width -= 2;
   cropArea.height -= 2;
+  audioSourceId = 'none';
+
+  if (boolean) {
+    aperture.getAudioSources().then(devices => {
+      // WILL NOT APPLY
+      audioSourceId = (devices && devices[0] && devices[0].id) || 'none';
+    });
+  }
 
   const options = {
     fps: 30,
     cropArea: cropArea,
     showCursor: true,
-    highlightClicks: true
+    highlightClicks: true,
+    audioSourceId: audioSourceId
   };
 
   aperture.startRecording(options).then(filePath => {
     console.log('-------------------------------------------------')
     console.log(`Started recording after ${Date.now() / 1000}s`);
     console.log('-------------------------------------------------')
+    callback();
   })
   .catch(err => {
     console.log('-------------------------------------------------')

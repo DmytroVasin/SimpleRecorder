@@ -38,13 +38,17 @@ class Recorder extends Component {
   stopCamera = () => {
     let { video } = this.refs
 
+    this.setState({
+      show_camera: true
+    })
+
     this.localStream.getVideoTracks()[0].stop();
     video.src = null
   }
 
   startCamera = () => {
     navigator.getUserMedia(
-      { audio: false, video: { width: 100, height: 100 } },
+      { audio: false, video: { width: 150, height: 150 } },
       this.getMediaSuccess,
       this.getMediaError
     );
@@ -55,7 +59,12 @@ class Recorder extends Component {
 
     let { video } = this.refs
     video.src = window.URL.createObjectURL(stream)
-    video.onloadedmetadata = (e) => { video.play() }
+    video.onloadedmetadata = (e) => {
+      video.play();
+      this.setState({
+        show_camera: true
+      })
+    }
   }
 
   getMediaError = (e) => {
@@ -65,11 +74,11 @@ class Recorder extends Component {
 
 
   render() {
-    const { camera } = this.state;
+    const { show_camera } = this.state;
 
     return (
       <div className='window'>
-        <video ref='video' id='camera-preview' className={ classNames({ 'show': camera }) }></video>
+        <video ref='video' id='camera-preview' className={ classNames({ 'show': show_camera }) }></video>
       </div>
     )
   }
