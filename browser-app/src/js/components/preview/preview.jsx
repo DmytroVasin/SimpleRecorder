@@ -17,10 +17,12 @@ export class Preview extends Component {
 
   componentDidMount() {
     ipcRenderer.on('finish-processing', this.handleFinishProcessing);
+    ipcRenderer.on('finish-downloading', this.handleFinishDownloading);
   }
 
   componentWillUnmount() {
     ipcRenderer.removeListener('finish-processing', this.handleFinishProcessing);
+    ipcRenderer.removeListener('finish-downloading', this.handleFinishDownloading);
   }
 
 
@@ -51,6 +53,12 @@ export class Preview extends Component {
   handleFinishProcessing = () => {
     this.setState({
       recorder: 'recording'
+    })
+  }
+
+  handleFinishDownloading = () => {
+    this.setState({
+      recorder: 'picking'
     })
   }
 

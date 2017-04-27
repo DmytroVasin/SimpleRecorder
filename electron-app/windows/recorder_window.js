@@ -21,6 +21,16 @@ class RecorderWindow {
 
     this.window.loadURL(htmlPath);
   }
+
+  disable() {
+    this.window.setResizable(false);
+    this.window.setIgnoreMouseEvents(true);
+  }
+
+  enable() {
+    this.window.setResizable(true);
+    this.window.setIgnoreMouseEvents(false);
+  }
 }
 
 module.exports = RecorderWindow;

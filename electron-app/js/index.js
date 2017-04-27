@@ -39,6 +39,8 @@ ipcMain.on('quit-app', () => {
 });
 
 ipcMain.on('start-processing', (event, boolean) => {
+  recorder.disable()
+
   startRecording(recorder, boolean, () => {
     mainWindow.window.webContents.send('finish-processing')
   });
@@ -49,6 +51,9 @@ ipcMain.on('start-cropping', () => {
 });
 
 ipcMain.on('stop-recording', () => {
+  recorder.enable()
+  recorder.window.hide()
+
   stopRecording((recorderedFilePath) => {
     saveFile(recorderedFilePath, (savedFilePath) => {
 
@@ -56,6 +61,7 @@ ipcMain.on('stop-recording', () => {
       message = 'File was saved successfully';
 
       sendNotification(title, message);
+      mainWindow.window.webContents.send('finish-downloading')
     });
   })
 });
