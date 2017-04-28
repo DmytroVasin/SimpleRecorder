@@ -13,7 +13,7 @@ class MainWindow {
       width: 200,
       frame: true,
       hasShadow: false,
-      resizable: false,
+      resizable: true, //false,
       maximizable: false
     });
 

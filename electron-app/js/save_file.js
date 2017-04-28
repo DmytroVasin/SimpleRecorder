@@ -6,7 +6,8 @@ const path = require('path');
 
 const { app, dialog } = electron;
 
-const saveFile = function(url, callback) {
+
+const saveFile = (url, callback) => {
   let targetPath = app.getPath('downloads');
   let name = fileName();
 
@@ -16,7 +17,7 @@ const saveFile = function(url, callback) {
     filters: [
       { name: 'Movies', extensions: ['mp4'] }
     ]
-  }, function(filePath) {
+  }, (filePath) => {
     if (filePath) {
       rename(url, filePath);
 
@@ -25,12 +26,32 @@ const saveFile = function(url, callback) {
   })
 };
 
-const fileName = function() {
+const saveScreenshot = (image, callback) => {
+  let targetPath = app.getPath('downloads');
+  let name = fileName();
+
+  dialog.showSaveDialog({
+    title: 'Screen Record',
+    defaultPath: path.join(targetPath, name),
+    filters: [
+      { name: 'Images', extensions: ['jpg'] },
+    ]
+  }, function (filePath) {
+    if (filePath){
+      image.write(filePath)
+
+      callback(filePath)
+    }
+  });
+}
+
+const fileName = () => {
   let data = moment().format('MMMM_Do_YYYY_hh_mm_ss')
 
   return `${data}.mp4`;
-}
+};
 
 module.exports = {
-  saveFile: saveFile
+  saveFile: saveFile,
+  saveScreenshot: saveScreenshot
 }

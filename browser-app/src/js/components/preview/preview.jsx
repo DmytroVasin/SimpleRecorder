@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { buildPhoto } from '../../utils/screenshotter';
 
 import { MenuRecorder } from './menu/recorder'
 import { MenuSettings } from './menu/settings'
@@ -90,6 +91,10 @@ export class Preview extends Component {
     });
   }
 
+  makePhoto = (value) => {
+    buildPhoto();
+  }
+
   render() {
     return (
       <div id='preview-page'>
@@ -98,7 +103,8 @@ export class Preview extends Component {
           takeVideo={this.takeVideo}
           takePhoto={this.takePhoto}
           startRecording={this.startRecording}
-          stopRecording={this.stopRecording} />
+          stopRecording={this.stopRecording}
+          makePhoto={this.makePhoto} />
 
         <MenuSettings
           recorder={this.state.recorder}

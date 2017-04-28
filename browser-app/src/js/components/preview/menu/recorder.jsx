@@ -2,12 +2,17 @@ import React from 'react'
 import classNames from 'classnames';
 
 import videoSrc from '../../../../images/video.png';
-import imageSrc from '../../../../images/image.png';
 import startSrc from '../../../../images/start.png';
 import stopSrc from '../../../../images/stop.png';
 import waitingSrc from '../../../../images/waiting.png';
+import takeImageSrc from '../../../../images/image.png';
+import makeImageSrc from '../../../../images/image_make.png';
 
 export class MenuRecorder extends React.Component {
+
+  handleTakeVideo = () => {
+    this.props.takeVideo()
+  }
 
   handleStartRecording = () => {
     this.props.startRecording()
@@ -17,12 +22,12 @@ export class MenuRecorder extends React.Component {
     this.props.stopRecording()
   }
 
-  handleTakeVideo = () => {
-    this.props.takeVideo()
-  }
-
   handleTakePhoto = () => {
     this.props.takePhoto()
+  }
+
+  handleMakePhoto = () => {
+    this.props.makePhoto()
   }
 
   render () {
@@ -32,10 +37,6 @@ export class MenuRecorder extends React.Component {
       <div id='recorder' className={recorder}>
         <div className='button take-video' onClick={this.handleTakeVideo}>
           <img src={videoSrc} />
-        </div>
-
-        <div className='button take-photo' onClick={this.handleTakeVideo}>
-          <img src={imageSrc} />
         </div>
 
         <div className='button start-rec' onClick={this.handleStartRecording}>
@@ -48,6 +49,14 @@ export class MenuRecorder extends React.Component {
 
         <div className='button waiting'>
           <img src={waitingSrc} />
+        </div>
+
+        <div className='button take-photo' onClick={this.handleTakePhoto}>
+          <img src={takeImageSrc} />
+        </div>
+
+        <div className='button make-photo' onClick={this.handleMakePhoto}>
+          <img src={makeImageSrc} />
         </div>
       </div>
     )

@@ -31,6 +31,7 @@
 
       &.picking {
         .take-photo { display: block; }
+        .make-photo { display: none;  }
         .take-video { display: block; }
         .start-rec  { display: none;  }
         .stop-rec   { display: none;  }
@@ -39,14 +40,7 @@
 
       &.video_cropping {
         .take-photo { display: none;  }
-        .take-video { display: none;  }
-        .start-rec  { display: block; }
-        .stop-rec   { display: none;  }
-        .waiting    { display: none;  }
-      }
-
-      &.photo_cropping {
-        .take-photo { display: none;  }
+        .make-photo { display: none;  }
         .take-video { display: none;  }
         .start-rec  { display: block; }
         .stop-rec   { display: none;  }
@@ -55,18 +49,29 @@
 
       &.processing {
         .take-photo { display: none;  }
+        .make-photo { display: none;  }
         .take-video { display: none;  }
-        .start-rec  { display: none; }
+        .start-rec  { display: none;  }
         .stop-rec   { display: none;  }
-        .waiting    { display: block;  }
+        .waiting    { display: block; }
       }
 
       &.recording {
         .take-photo { display: none;  }
+        .make-photo { display: none;  }
         .take-video { display: none;  }
         .start-rec  { display: none;  }
         .stop-rec   { display: block; }
-        .waiting    { display: none; }
+        .waiting    { display: none;  }
+      }
+
+      &.photo_cropping {
+        .take-photo { display: none;  }
+        .make-photo { display: block; }
+        .take-video { display: none;  }
+        .start-rec  { display: none;  }
+        .stop-rec   { display: none;  }
+        .waiting    { display: none;  }
       }
     }
   }

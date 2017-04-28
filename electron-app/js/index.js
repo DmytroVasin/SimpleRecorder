@@ -14,7 +14,7 @@ const RecorderWindow  = require('../windows/recorder_window');
 const TrayIcon = require('./TrayIcon');
 
 const Actuary  = require('./actuary');
-const { saveFile } = require('./save_file');
+const { saveFile, saveScreenshot } = require('./save_file');
 
 let mainWindow = null;
 let recorder = null;
@@ -30,7 +30,7 @@ app.on('ready', () => {
   trayIcon = new TrayIcon();
 
   recorder = new RecorderWindow();
-  actuary = new Actuary(recorder)
+  actuary = new Actuary(recorder);
 });
 
 ipcMain.on('quit-app', () => {
@@ -59,10 +59,7 @@ ipcMain.on('stop-recording', () => {
   actuary.stopRecording((recorderedFilePath) => {
     saveFile(recorderedFilePath, (savedFilePath) => {
 
-      title = savedFilePath.replace(/^.*[\\\/]/, '');
-      message = 'File was saved successfully';
-
-      sendNotification(title, message);
+      sendNotification(savedFilePath);
       mainWindow.window.webContents.send('finish-downloading')
     });
   })
@@ -80,8 +77,24 @@ ipcMain.on('resize-app-window', (event, boolean) => {
   mainWindow.setWindowSize(boolean);
 });
 
+ipcMain.on('make-snapshot', (event, base64data) => {
+  recorder.window.hide()
 
-const sendNotification = (title, message) => {
+  actuary.cropScreenshot(base64data, (croppedImage) => {
+    saveScreenshot(croppedImage, (savedFilePath) => {
+
+      sendNotification(savedFilePath);
+      mainWindow.window.webContents.send('finish-downloading')
+    })
+  });
+});
+
+
+
+const sendNotification = (filePath) => {
+  title = filePath.replace(/^.*[\\\/]/, '');
+  message = 'File was saved successfully';
+
   mainWindow.window.webContents.send('display-notification', {
     title: title,
     options: { body: message }

@@ -1,5 +1,6 @@
 const electron = require('electron');
 const aperture = require('aperture')();
+const jimp = require('jimp');
 
 class Actuary {
   constructor(recorder) {
@@ -11,6 +12,21 @@ class Actuary {
       highlightClicks: true,
       audioSourceId: 'none'
     }
+  }
+
+  cropScreenshot(base64data, callback) {
+    let encondedImageBuffer = new Buffer(base64data.replace(/^data:image\/(png|gif|jpeg);base64,/,''), 'base64');
+
+    jimp.read(encondedImageBuffer, (err, image) => {
+      if (err) throw err;
+
+      let cropArea = this.recorder.window.getBounds()
+      cropArea = this.removeBorders(cropArea)
+
+      image.crop(cropArea.x, cropArea.y, cropArea.width, cropArea.height)
+
+      callback(image)
+    });
   }
 
   startRecording(callback) {
@@ -54,12 +70,18 @@ class Actuary {
     area.y = (this.workArea.height + this.workArea.y) - (area.height + area.y);
 
     // Remove dashed boundaries
+    area = this.removeBorders(area)
+
+    return area;
+  }
+
+  removeBorders(area) {
     area.x += 1;
     area.y += 1;
     area.width -= 2;
     area.height -= 2;
 
-    return area;
+    return area
   }
 }
 
