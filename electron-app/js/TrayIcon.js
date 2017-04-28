@@ -10,19 +10,6 @@ class TrayIcon {
 
     const contextMenu = Menu.buildFromTemplate([
       {
-        label: 'Start',
-        click: () => {
-          console.log('Start recording')
-        }
-      },
-      {
-        label: 'Take Snapshot',
-        click: () => {
-          console.log('Stop recording')
-        }
-      },
-      { type: 'separator' },
-      {
         label: 'Quit Recorder',
         click: () => {
           app.quit();
