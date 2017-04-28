@@ -5,7 +5,7 @@ const path = require('path');
 module.exports = {
   entry: {
     main: './main.jsx',
-    recorder: './recorder.jsx',
+    recorder: './recorder.jsx'
   },
   target: 'electron',
   context: __dirname + '/browser-app/src/js',

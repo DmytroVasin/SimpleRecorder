@@ -50,8 +50,7 @@
   },
   "build": {
     "asar": false,
-    "appId": "com.electron.lcharts",
-    "category": "public.app-category.productivity",
+    "appId": "com.electron.simplerecorder",
     "dmg": {
       "title": "Listen Charts Installation",
       "contents": [

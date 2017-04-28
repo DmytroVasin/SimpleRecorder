@@ -1,18 +1,21 @@
+
 var webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
   entry: {
-    main: './main.jsx'
+    main: './main.jsx',
+    recorder: './recorder.jsx'
   },
   target: 'electron',
   context: __dirname + '/browser-app/src/js',
 
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['*', '.js', '.jsx']
   },
 
   output: {
-    path: './app/browser-app/',
+    path: path.resolve(__dirname, 'app', 'browser-app'),
     filename: '[name].js',
     publicPath: '../../browser-app/'
   },
