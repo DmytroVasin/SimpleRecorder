@@ -1,6 +1,6 @@
 {
   "name": "SimpleRecorder",
-  "version": "0.0.6",
+  "version": "0.0.1",
   "license": "MIT",
   "description": "Video and Photo recorder based on Electron",
   "author": "Dmytro Vasin <dmytro.vasin@gmail.com>",

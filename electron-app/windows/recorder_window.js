@@ -14,9 +14,9 @@ class RecorderWindow {
       minWidth: 200,
       frame: false,
       hasShadow: false,
+      alwaysOnTop: true,
       transparent: true,
-      resizable: true,
-      alwaysOnTop: true
+      resizable: true
     });
 
     this.window.loadURL(htmlPath);

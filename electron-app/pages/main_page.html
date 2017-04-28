@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Video Recorder</title>
+    <title>Simple Recorder</title>
 
     <script type='text/javascript'>
       window.shell = require('electron').shell;
@@ -30,12 +30,9 @@
     </script>
 
     <script>
-      // Notifications can be sent only from renderer process
       ipcRenderer.on('display-notification', (event, args) => {
         new window.Notification( args.title, args.options)
       })
     </script>
-
-    <div id='image-preview'></div>
   </body>
 </html>

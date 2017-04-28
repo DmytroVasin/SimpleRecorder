@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>WebRTCViewer Recorder</title>
+    <title>Simple Recorder</title>
 
     <script type='text/javascript'>
       window.remote = require('electron').remote;
@@ -13,7 +13,7 @@
     <div id='react-root'></div>
 
     <script>
-      var bundlePath = '../../browser-app/dist/js/recorder.js';
+      var bundlePath = '../../browser-app/recorder.js';
 
       if (process.env.NODE_ENV === 'development') {
         bundlePath = 'http://localhost:8080/browser-app/dist/js/recorder.js';
