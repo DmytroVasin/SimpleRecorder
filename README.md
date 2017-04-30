@@ -1,5 +1,18 @@
 ## SimpleRecorder On Electron:
 
+Electron app to take screenshots and video recording
+
+## App allows you:
+  - Make screenshot from selected area.
+  - Take Video from selected area.
+  - Turn on/off webcam.
+  - Turn on/off audio.
+  - Download video and screenshots with a timestamp
+
+## Video: *Click to play*
+
+[![Preview](https://raw.githubusercontent.com/DmytroVasin/SimpleRecorder/master/_readme/_preview.png)](https://player.vimeo.com/video/215383700?autoplay=1)
+
 Click to download .dmg package of SimpleRecorder:
 
 - [From Github](https://github.com/DmytroVasin/SimpleRecorder/releases/latest)
@@ -12,18 +25,6 @@ Click to download .dmg package of SimpleRecorder:
 - Open OS X System Preferences > Security & Privacy
 - On the "General" tab click the lock in the lower left corner to unlock the general preference pane
 - Under "Allow applications downloaded from:", select the "Anywhere" radio button
-
-
-## Video: *Click to play*
-
-[![Preview](https://raw.githubusercontent.com/DmytroVasin/ListenChartsOnElectron/master/_readme/_preview.png)](https://player.vimeo.com/video/192313570?autoplay=1)
-
-## App allows you:
-  - Make screenshot from selected area.
-  - Take Video from selected area.
-  - Turn on/off webcam.
-  - Turn on/off audio.
-
 
 ## Setup:
 
